@@ -51,6 +51,13 @@ public class UDPServer {
                             datagramSocket.send(datagramPacket);
 
                         }
+                        System.out.println("\n");
+
+                        myReader.close();
+                    } catch (FileNotFoundException e) {
+                        System.out.println("An error occurred.");
+                    }
+                }
 else if(messageFromClient.startsWith("le shkruaj")) {
 
                     String[] warr = messageFromClient.split(" ",5);
