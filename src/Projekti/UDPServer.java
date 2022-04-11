@@ -51,4 +51,39 @@ public class UDPServer {
                             datagramSocket.send(datagramPacket);
 
                         }
+else if(messageFromClient.startsWith("le shkruaj")) {
 
+                    String[] warr = messageFromClient.split(" ",5);
+
+                    String[] wcmd = {"",""}; wcmd[0] = warr[1]; wcmd[1]= warr[2];
+
+                    String[] writeMessage = messageFromClient.split("'",2);
+                    {
+                        try {
+                            FileWriter myWriter = new FileWriter("C:\\RrjetaKompjuterike_Projekti\\src\\Projekti\\" +wcmd[1]);
+                            myWriter.write(writeMessage[1]);
+                            myWriter.close();
+                            System.out.println("Successfully wrote to the file. \n");
+
+                        } catch (IOException e) {
+                            System.out.println("An error occurred.");
+                        }
+                    }
+                }
+
+            } catch(IOException e) {
+                e.printStackTrace();
+                break;
+            }
+        }
+    }
+
+    public static void main(String[] args) throws SocketException {
+        DatagramSocket datagramSocket = new DatagramSocket(4321);
+        System.out.println("Server Started....");
+        System.out.println("Waiting for Clients");
+        UDPServer server = new UDPServer(datagramSocket);
+        server.receiveThenSend();
+
+    }
+}
