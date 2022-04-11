@@ -34,5 +34,21 @@ public class UDPClient {
                 System.out.println("The server says you said: " + messageFromServer);
 
 
+}catch(IOException e) {
+                e.printStackTrace();
+                break;
+            }
+        }
+    }
 
+    public static void main(String[] args) throws SocketException, UnknownHostException {
+
+        DatagramSocket datagramSocket = new DatagramSocket();
+        InetAddress inetAddress = InetAddress.getByName("192.168.178.128");
+        UDPClient client = new UDPClient(datagramSocket, inetAddress);
+        System.out.println("Send datagram packets to a server.");
+        client.sendThenReceive();
+    }
+
+}
 
